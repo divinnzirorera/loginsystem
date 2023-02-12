@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user Dashboard</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <main>
+        <h1>Dashboard</h1>
+
+        <h3 style="text-align: center;">your user id is <%= id%></h3>
+
+        <form action="update_user/<%= id%>" method="post">
+            <input type="hidden" name="_method" value="PUT">
+
+           <div class="img_container">
+            <img src='<%= image%>' class="image" alt="profile picture" />
+           </div>
+
+            <div class="input__container">
+                <label for="email">Update your email:</label>
+                <input type="email" name="email" id="email" value='<%= email%>'>
+            </div>
+            <div class="input__container">
+                <label for="uname">Update your username:</label>
+                <input type="text" name="uname" id="uname" value='<%= uname%>'>
+            </div>
+            <div class="input__container">
+                <label for="pwd">Update your password:</label>
+                <input type="password" name="pwd" id="pwd" value='<%= password%>'>
+            </div>
+
+            <div class="input__container">
+                <label for="pic" id="piclabel">Update your profile picture</label>
+                <input type="file" name="profile_pic_update" id="pic">
+            </div>
+
+            <div class="input__container">
+                <input type="submit" value="update">
+            </div>
+        </form>
+
+        <button id="del_acc">delete Account</button>
+    </main>
+</body>
+
+<script>
+    let inputFile = document.querySelector('#pic');
+    inputFile.addEventListener('change',()=>{
+        let filename = inputFile.value.split('\\').pop()
+        document.querySelector("#piclabel").innerHTML = filename + `<i class="fa fa-check"></i>`;
+        document.querySelector('#piclabel').style.backgroundColor = 'black'
+        document.querySelector('#piclabel').style.color = 'white'
+    })
+
+    // image 
+
+    let image = document.querySelector('img')
+    image.addEventListener('click',()=>{
+        image.classList.toggle('active')
+
+        document.querySelector('.img_container').classList.toggle('active');
+    })
+
+    let delBtn = document.querySelector("#del_acc")
+
+    
+    delBtn.addEventListener('click',()=>{
+
+        window.location.host = 'localhost'
+        window.location.pathname = "deleteaccount/<%=id%>"
+    });
+</script>
+
+</html>

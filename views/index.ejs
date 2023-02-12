@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Create Account</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <main>
+    <h1>Create Account</h1>
+
+    <form action="signup" method="post" enctype="multipart/form-data">
+
+      <div class="input__container">
+        <label for="email">Enter your email:</label>
+        <input type="email" name="email" id="email" required>
+      </div>
+      <div class="input__container">
+        <label for="uname">Create username:</label>
+        <input type="text" name="uname" id="uname" required>
+      </div>
+      <div class="input__container">
+        <label for="pwd">Create password:</label>
+        <input type="password" name="pwd" id="pwd" required>
+      </div>
+        <div class="input__container">
+          <label for="pic" id="piclabel">Upload profile pic</label>
+          <input type="file" name="profile_pic" id="pic" required>
+        </div>
+      <div class="input__container">
+        <input type="submit" value="Submit" onclick="validate()">
+      </div>
+    </form>
+
+    <h1>Or</h1>
+    <button class="login_btn">Login</button>
+  </main>
+</body>
+
+<script>
+
+    let inputFile = document.querySelector('#pic');
+    inputFile.addEventListener('change', () => {
+      let filename = inputFile.value.split('\\').pop()
+      document.querySelector("#piclabel").innerHTML = filename + `<i class="fa fa-check"></i>`;
+      document.querySelector('#piclabel').style.backgroundColor = 'black'
+      document.querySelector('#piclabel').style.color = 'white'
+    })
+
+    const validate = () => {
+        if(inputFile.value == ''){
+          alert('you must choose a photo')
+          return false;
+        }
+      }
+
+      let login_btn = document.querySelector('.login_btn')
+      login_btn.addEventListener('click',()=>{
+
+        window.location.pathname = 'login'
+      })
+</script>
+
+</html>
